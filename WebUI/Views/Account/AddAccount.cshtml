@@ -1,0 +1,27 @@
+﻿@model Core.Models.Account
+@{
+    ViewData["Title"] = "AddAccount";
+}
+
+<h1>Yeni Hesap Girişi</h1>
+<form method ="post">
+    @Html.HiddenFor(x=>x.Id)
+    <div class="form-group"
+    @Html.Label("Kullanıcı Adı")
+    <span asp-validation-for="UserName" class="text-danger"></span>
+    <input type ="text" asp-for="UserName" class="form-control"/>
+    </div>
+    <div class="form-group"
+    @Html.Label("Site Adı")
+    <span asp-validation-for="SiteUrl" class="text-danger"></span>
+    <input type ="text" asp-for="SiteUrl"class="form-control"/>
+    </div>
+    <div class="form-group"
+    @Html.Label("Şifre")
+     <span asp-validation-for="Password" class="text-danger"></span>
+    <input type ="text" asp-for="Password"class="form-control"/>
+    </div>
+
+    <button class="btn btn-outline-info">Kaydet</button>
+
+</form>

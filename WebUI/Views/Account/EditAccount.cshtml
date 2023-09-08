@@ -1,0 +1,63 @@
+﻿@model Core.Models.Account
+@{
+    ViewData["Title"] = "EditAccount";
+}
+
+<h1>Hesap Güncelleme Sayfası</h1>
+<form method="post">
+    @Html.HiddenFor(x=>x.Id)
+    <div class="form-group"
+    @Html.Label("Kullanıcı Adı")
+    <input type ="text" asp-for="UserName" class="form-control"/>
+    <span asp-validation-for="UserName" class="text-danger"></span>
+
+    </div>
+    <div class="form-group"
+    @Html.Label("Site Adı")
+    <input type ="text" asp-for="SiteUrl"class="form-control"/>
+    <span asp-validation-for="SiteUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group"
+    @Html.Label("Şifre")
+    
+    <input type ="text" asp-for="Password"class="form-control"/>
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    </div>
+
+    <button id="updateButton" type="submit" class="btn btn-outline-info">Değişiklikleri Kaydet</button>
+
+
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        $("#updateButton").click(function (e) {
+            e.preventDefault(); // Formun otomatik olarak gönderilmesini engelleyin
+
+            // Form verilerini alın
+            var formData = $("form").serialize();
+
+            // AJAX isteğini gönderin
+            $.ajax({
+                type: "POST", // POST isteği yapın
+                url: "/Account/EditAccount", // Gönderilecek URL'yi ayarlayın
+                data: formData, // Form verilerini gönderin
+                success: function (data) {
+                    console.log("Başarıyla güncellendi");
+                    // Kullanıcıyı bir başka sayfaya yönlendirebilirsiniz
+                    window.location.href = '/Account/Index';
+                },
+                error: function (error) {
+                    console.log("Hata oluştu:", error);
+                }
+            });
+        });
+    });
+</script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+

@@ -1,0 +1,118 @@
+﻿@model WebUI.Models.UserViewModel
+@{
+    Layout = null;
+}
+
+@* 
+<h1>SignUp</h1>
+<form asp-controller="Login" asp-action="SignUp" method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Kullanıcı Adı</label>
+        <input type="text" class="form-control" id="UserName" name="UserName" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Ad</label>
+        <input type="text" class="form-control" id="FirstName" name="FirstName" aria-describedby="emailHelp" placeholder="Enter ">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Soyadı</label>
+        <input type="text" class="form-control" id="LastName" name="LastName" aria-describedby="emailHelp" placeholder="Enter ">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Şifre</label>
+        <input type="text" class="form-control" id="Password" name="Password" placeholder="Password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>  *@
+
+
+<!DOCTYPE html>
+<!-- Website - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content=" Today in this blog you will learn how to create a responsive Login & Registration Form in HTML CSS & JavaScript. The blog will cover everything from the basics of creating a Login & Registration in HTML, to styling it with CSS and adding with JavaScript." />
+    <meta name="keywords"
+          content="
+ Animated Login & Registration Form,Form Design,HTML and CSS,HTML CSS JavaScript,login & registration form,login & signup form,Login Form Design,registration form,Signup Form,HTML,CSS,JavaScript,
+" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Kayıt Formu</title>
+    <link rel="stylesheet" href="~/login-registration-form-html-css/style.css" />
+    <script src="~/login-registration-form-html-css/custom-scripts.js" defer></script>
+</head>
+<body>
+    <section class="wrapper">
+        <div class="form signup">
+            <header>Kayıt Formu</header>
+            <form id="signupform">
+                
+               
+                
+                <input type="text" class="form-control" asp-for="UserName" id="UserName" name="UserName" placeholder="Kullanıcı Adı">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+
+               
+                <input type="email" class="form-control" asp-for="Email" id="Email" name="Email" placeholder="Mail">
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+                
+                <input type="text" class="form-control" asp-for="FirstName" id="FirstName" name="FirstName" placeholder="Ad">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+               
+                <input type="text" class="form-control" asp-for="LastName" id="LastName" name="LastName" placeholder="Soyad">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+
+               
+                <input type="text" class="form-control" asp-for="Password" id="Password" name="Password" placeholder="Şifre">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="text">
+                    <h3>Zaten bir hesabım var <a href="/Login/Login">Giriş Yap</a></h3>
+                </div>
+
+                <input type="button" onclick="signup()" value="Giriş Yap" />
+
+              
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function signup() {
+            var data = $("#signupform").serialize();
+            console.log(data);
+            $.ajax({
+                type: 'POST',
+                url: '/Login/Signup',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    window.location.href = data;
+                },
+                error: function (err){
+                    console.log(err);
+                }
+            })
+        }
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+
+

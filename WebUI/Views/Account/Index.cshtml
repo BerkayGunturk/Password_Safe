@@ -1,0 +1,41 @@
+﻿@using Core.Models
+@model List<Account>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Hesaplar</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Kullanıcı Adı</th>
+        <th>Site Adı</th>
+        <th>Şifre</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.UserName</td>
+            <td>@item.SiteUrl</td>
+            <td>@item.Password</td>
+            <td><a href="/Account/DeleteAccount/@item.Id" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="/Account/EditAccount/@item.Id" class="btn btn-outline-warning">Düzenle</a></td>
+        </tr>
+
+    }
+
+</table>
+
+<a href="/Account/AddAccount" class="btn btn-outline-info">Yeni Hesap Girişi</a>
+
+
+
+
+
+
+
